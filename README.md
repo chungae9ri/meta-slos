@@ -11,3 +11,7 @@ How to build slos using bitbake
 6. Replace "BBLAYERS" variable with
    BBLAYERS ?= " /home/good4u/dotori/poky/meta-slos"
 7. Run "bitbake slos" in poky/build-slos directory
+
+Currently, do_fetch(), do_unpack(), do_compile(), do_build(), do_clean() 
+tasks are implemented.
+"bitbake slos -c clean" command cleans the output directory.
