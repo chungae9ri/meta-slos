@@ -1,5 +1,6 @@
 # meta-slos
 bitbake recipes for slos build
+
 How to build slos using bitbake
 1. Download poky 
    git clone git://git.yoctoproject.org/poky.git
