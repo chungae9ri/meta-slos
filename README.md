@@ -14,6 +14,8 @@ How to build slos using bitbake
 
 Currently, do_fetch(), do_unpack(), do_compile(), do_build(), do_clean() 
 tasks are implemented.
+
 do_fetch() and do_unpack() tasks are git-clone from "github.com/chungae9ri/slos" 
 and unpack it. Not do_patch() yet.
+
 "bitbake slos -c clean" command cleans the output directory.
