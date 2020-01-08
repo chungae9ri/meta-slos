@@ -9,7 +9,7 @@ How to build slos using bitbake
 4. Run ". oe-init-build-env build-slos"
 5. Open build-slos/conf/bblayers.conf
 6. Replace "BBLAYERS" variable with
-   BBLAYERS ?= " /home/good4u/dotori/poky/meta-slos"
+   BBLAYERS ?= " ${your_poky_dir_path}/meta-slos"
 7. Run "bitbake slos" in poky/build-slos directory
 
 Currently, do_fetch(), do_unpack(), do_compile(), do_build(), do_clean() 
