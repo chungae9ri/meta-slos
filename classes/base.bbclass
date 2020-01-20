@@ -55,7 +55,6 @@ python do_listtasks() {
         if d.getVarFlag(e, 'task', False):
             bb.plain("%s" % e)
 }
-# kyi S
 
 def get_lic_checksum_file_list(d):
     filelist = []
@@ -152,8 +151,6 @@ base_do_clean() {
 		bbnote "nothing to compile"
 	fi
 }
-
-# kyi E
 
 addtask build
 do_build[dirs] = "${TOPDIR}"
