@@ -10,7 +10,7 @@ How to build slos using bitbake
 5. Open build-slos/conf/bblayers.conf
 6. Replace "BBLAYERS" variable with
    BBLAYERS ?= " ${your_poky_dir_path}/meta-slos"
-7. Run "bitbake toolchain slos" in poky/build-slos directory
+7. Run "bitbake world" or "bitbake toolchain slos" in poky/build-slos directory
 
 Two recipes for toolchain and slos. 
 Toolchain recipe sets up the arm-none-eabi tools in ${HOME}/bin/arm-2017q1 directory.
