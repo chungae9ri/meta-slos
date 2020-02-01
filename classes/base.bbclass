@@ -41,7 +41,7 @@ python do_showdata() {
     import sys
     # emit variables and shell functions
     bb.data.emit_env(sys.__stdout__, d, True)
-    # emit the metadata which isnt valid shell
+    # emit the metadata which isn't valid shell
     for e in bb.data.keys(d):
         if d.getVarFlag(e, 'python', False):
             bb.plain("\npython %s () {\n%s}" % (e, d.getVar(e)))
@@ -80,6 +80,13 @@ def get_lic_checksum_file_list(d):
         except bb.fetch.MalformedUrl:
             bb.fatal(d.getVar('PN') + ": LIC_FILES_CHKSUM contains an invalid URL: " + url)
     return " ".join(filelist)
+addtask build
+do_build[dirs] = "${TOPDIR}"
+do_build[nostamp] = "1"
+python base_do_build () {
+    bb.note("The included, default BB base.bbclass does not define a useful default task.")
+    bb.note("Try running the 'listtasks' task against a .bb to see what tasks are defined.")
+}
 
 addtask fetch before do_unpack
 do_fetch[dirs] = "${DL_DIR}"
@@ -115,49 +122,4 @@ python base_do_unpack() {
         bb.fatal(str(e))
 }
 
-oe_runmake_call() {
-	bbnote ${MAKE} ${EXTRA_OEMAKE} "$@"
-	${MAKE} ${EXTRA_OEMAKE} "$@"
-}
-
-oe_runmake() {
-	oe_runmake_call "$@" || die "oe_runmake failed"
-}
-
-
-addtask compile after do_unpack before do_build
-do_compile[dirs] = "${B}/git"
-do_compile[nostamp] = "1"
-base_do_compile() {
-	cd ${B}/git
-
-	if [ -e Makefile -o -e makefile -o -e GNUmakefile ]; then
-		oe_runmake || die "make failed"
-	else
-		bbnote "nothing to compile"
-	fi
-}
-
-
-addtask clean
-do_clean[dirs] = "${B}/git"
-do_clean[nostamp] = "1"
-base_do_clean() {
-	cd ${B}/git
-
-	if [ -e Makefile -o -e makefile -o -e GNUmakefile ]; then
-		oe_runmake clean || die "make failed"
-	else
-		bbnote "nothing to compile"
-	fi
-}
-
-addtask build
-do_build[dirs] = "${TOPDIR}"
-do_build[nostamp] = "1"
-python base_do_build () {
-    bb.note("The included, default BB base.bbclass does not define a useful default task.")
-    bb.note("Try running the 'listtasks' task against a .bb to see what tasks are defined.")
-}
-
-EXPORT_FUNCTIONS do_fetch do_unpack do_compile do_build do_clean 
+EXPORT_FUNCTIONS do_fetch do_unpack do_build
